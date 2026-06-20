@@ -1,0 +1,30 @@
+# Android / Gradle
+*.iml
+.gradle/
+.idea/
+/local.properties
+.DS_Store
+build/
+.cxx/
+.externalNativeBuild/
+
+# native build dirs (cmake/ninja)
+/b_arm64
+/b_arm64-v8a
+/b_armeabi-v7a
+/b_x86
+/b_x86_64
+/build_arm64
+/out
+/out_so
+/captures
+
+# build artifacts
+*.zip
+*.so
+*.o
+*.apk
+
+# target-specific reverse-engineering artifacts (do NOT publish)
+/dump_full.cs
+/dump_split

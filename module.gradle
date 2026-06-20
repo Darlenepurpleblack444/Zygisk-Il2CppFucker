@@ -1,0 +1,9 @@
+ext {
+    moduleLibraryName = "il2cppdumper"
+    magiskModuleId = "zygisk_il2cppdumper"
+    moduleName = "Il2CppFucker"
+    moduleAuthor = "LiangYu"
+    moduleDescription = "Il2CppFucker - Zygisk in-process IL2CPP reflection/memory/Lua engine by LiangYu. Target package set in cpp/game.h (GamePackageName)."
+    moduleVersion = "v1.2.0"
+    moduleVersionCode = 1
+}
