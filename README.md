@@ -1,5 +1,9 @@
 # Il2CppFucker
 
+# If U love This Project,Pls give me a start!tHanks!:)
+
+# 如果你喜欢这个项目,请给我一颗星星,这将给我偌大的帮助!
+
 A Zygisk module that injects into an IL2CPP game process and turns it into a live, scriptable
 reverse-engineering engine — **dump metadata, reflect by name, read/write memory, call the game's
 own methods, and run hot-reloadable Lua** — all in-process.
